@@ -12,43 +12,8 @@ const skillsLine = document.querySelectorAll('.skillsLine div');
 const skillsNum = document.querySelectorAll('.skillsNum');
 
 
-// 1. إنشاء عنصر script لتحميل Supabase
-const script = document.createElement('script');
-script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
 
-// 2. تنفيذ الكود بعد تحميل المكتبة
-script.onload = function() {
-    // 3. تهيئة Supabase بعد التأكد من تحميل المكتبة
-    const supabaseUrl = 'https://zhbsltiiyiqjpkfwrrmy.supabase.co';
-    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpoYnNsdGlpeWlxanBrZndycm15Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQyODgyMjksImV4cCI6MjA1OTg2NDIyOX0.whyKXPtzjF_V_Dnu0sVT4gbm8v9HMRNXSQY87ufEM3A';
-    window.supabase = supabase.createClient(supabaseUrl, supabaseKey);
-    
-    // 4. اختبار الاتصال
-    window.supabase.from('projects').select('*')
-        .then(response => {
-            console.log(response.data);
-            // Assuming the response contains an image URL in the first item
 
-            // if (response.data && response.data.length > 0) {
-            //     const imgUrl = response.data[0].id; // Replace 'image_url' with the actual field name
-            //     document.querySelector('img').src = imgUrl;
-            // }
-
-            response.data.forEach((pro) => {
-                const div = document.createElement('div');
-                div.classList.add('project');
-                div.setAttribute('link', pro.Project_Link);
-                div.innerHTML = `<img src="${pro.Project_Image}" alt="Project Image">
-                                <h2>${pro.Project_Name}</h2>
-                                <p>${pro.Project_Description}</p>`;
-                container.appendChild(div);
-            });
-        })
-        .catch(error => console.error('Error:', error));
-};
-
-// 5. إضافة السكريبت إلى الصفحة
-document.head.appendChild(script);
 
 
 const skillsData = {
@@ -116,3 +81,18 @@ var firstDiv = container.firstElementChild;
 
 window.scrollY=0;
 window.scrollX=0;
+
+
+// إضافة كشف حجم الشاشة وتعديل السلوك حسبها
+window.addEventListener('resize', adjustLayout);
+
+function adjustLayout() {
+    if (window.innerWidth < 992) {
+        // تعديلات للشاشات الصغيرة
+    } else {
+        // إعادة العناصر لوضعها الطبيعي للشاشات الكبيرة
+    }
+}
+
+// تنفيذ الوظيفة عند التحميل
+window.addEventListener('load', adjustLayout);
